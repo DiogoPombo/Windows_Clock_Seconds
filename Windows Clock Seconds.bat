@@ -29,9 +29,7 @@ echo $enableButton.Size = New-Object System.Drawing.Size(75,23) >> "%psScript%"
 echo $enableButton.Location = New-Object System.Drawing.Point(10,60) >> "%psScript%"
 echo $enableButton.Add_Click({ >> "%psScript%"
 echo     reg add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /v ShowSecondsInSystemClock /t REG_DWORD /d 1 /f >> "%psScript%"
-echo     taskkill /f /im explorer.exe >> "%psScript%"
-echo     start explorer.exe >> "%psScript%"
-echo     [System.Windows.Forms.MessageBox]::Show('Seconds have been enabled.') >> "%psScript%"
+echo     [System.Windows.Forms.MessageBox]::Show('Seconds have been enabled, reboot to see changes!', 'Done!') >> "%psScript%"
 echo     $form.Close() >> "%psScript%"
 echo }) >> "%psScript%"
 echo $form.Controls.Add($enableButton) >> "%psScript%"
@@ -41,9 +39,7 @@ echo $disableButton.Size = New-Object System.Drawing.Size(75,23) >> "%psScript%"
 echo $disableButton.Location = New-Object System.Drawing.Point(100,60) >> "%psScript%"
 echo $disableButton.Add_Click({ >> "%psScript%"
 echo     reg add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' /v ShowSecondsInSystemClock /t REG_DWORD /d 0 /f >> "%psScript%"
-echo     taskkill /f /im explorer.exe >> "%psScript%"
-echo     start explorer.exe >> "%psScript%"
-echo     [System.Windows.Forms.MessageBox]::Show('Seconds have been disabled.') >> "%psScript%"
+echo     [System.Windows.Forms.MessageBox]::Show('Seconds have been disabled, reboot to see changes!', 'Done!') >> "%psScript%"
 echo     $form.Close() >> "%psScript%"
 echo }) >> "%psScript%"
 echo $form.Controls.Add($disableButton) >> "%psScript%"
@@ -59,10 +55,8 @@ echo $form.Topmost = $true >> "%psScript%"
 echo $form.Add_Shown({$form.Activate()}) >> "%psScript%"
 echo [void] $form.ShowDialog() >> "%psScript%"
 
-:: Executa o script PowerShell temporário
 powershell -ExecutionPolicy Bypass -File "%psScript%"
 
-:: Remove o script PowerShell temporário
 del "%psScript%"
 
 endlocal
