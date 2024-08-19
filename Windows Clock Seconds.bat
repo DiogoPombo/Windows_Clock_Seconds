@@ -51,7 +51,7 @@ set "exitFlag=%~dp0\exitFlag.tmp"
 
 echo 1 > "%exitFlag%"
 
-:: Cria o script PowerShell
+:: PowerShell
 echo Add-Type -AssemblyName System.Windows.Forms > "%psScript%"
 echo Add-Type -AssemblyName System.Drawing >> "%psScript%"
 echo $form = New-Object System.Windows.Forms.Form >> "%psScript%"
